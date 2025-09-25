@@ -47,7 +47,7 @@ export class AuthService {
     );
   }
 
-  registerStep2(data: Step2Data): Observable<any> {
+  registerStep3(data: Step2Data): Observable<any> {
     return this.http.post(
       `${this.baseUrl}register/step/3`,
       data

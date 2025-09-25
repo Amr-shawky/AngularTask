@@ -108,7 +108,7 @@
       }
     </form>
 
-    <form [formGroup]="step2Form" (ngSubmit)="onStep2Submit()" class="px-10 mx-auto py-8" *ngIf="currentStep === 2">
+    <form [formGroup]="step3Form" (ngSubmit)="onStep3Submit()" class="px-10 mx-auto py-8" *ngIf="currentStep === 2">
       <div class="relative z-0 w-full mb-5 group">
         <input formControlName="user_id" type="text" class="block py-2.5 px-2 w-full text-sm border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 peer" readonly placeholder=" ">
         <label for="floating_user_id" class="px-2 peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">User ID</label>
@@ -143,7 +143,7 @@
         <input formControlName="referral_code" type="text" class="block py-2.5 px-2 w-full text-sm border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 peer" placeholder=" ">
         <label for="floating_referral_code" class="px-2 peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Referral Code</label>
       </div>
-      <button type="submit" [disabled]="step2Form.invalid || isLoading" class="text-white font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center bg-green-700 hover:bg-green-800 focus:ring-green-300">
+      <button type="submit" [disabled]="step3Form.invalid || isLoading" class="text-white font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center bg-green-700 hover:bg-green-800 focus:ring-green-300">
         @if (isLoading) {
           <span>Loading...</span>
         } @else {

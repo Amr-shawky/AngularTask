@@ -7,9 +7,10 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
+  standalone: true,
   imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
   private authService = inject(AuthService);
@@ -27,8 +28,7 @@ export class LoginComponent {
       const loginData = this.loginForm.value;
       this.authService.login(loginData as { username: string; password: string }).subscribe({
         next: (res) => {
-          // Assuming response has 'token' field based on typical auth APIs
-          if(res.success===false){
+          if (res.success === false) {
             this.errorMessage = res.message || 'Login failed. Please check your credentials.';
             console.log(res);
             console.error(this.errorMessage);
@@ -37,7 +37,7 @@ export class LoginComponent {
           this.authService.saveToken(res.token);
           console.log('response:', res);
           console.log('Login successful');
-          // this.router.navigate(['/profile']);
+          this.router.navigate(['/profile']);
         },
         error: (err) => {
           this.errorMessage = 'Login failed. Please check your credentials.';

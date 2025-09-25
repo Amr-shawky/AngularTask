@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { ApiResponse } from '../../../../core/Models/api.interfaces'; // Adjust path as per your project structure
 
 @Component({
   selector: 'app-register',
@@ -46,8 +47,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
     password_confirmation: new FormControl('', Validators.required)
   }, { validators: this.matchPasswordValidator });
 
-  // Step 2 Form (User Info)
-  step2Form = new FormGroup({
+  // Step 3 Form (User Info)
+  step3Form = new FormGroup({ // Renamed from Step3Form to step3Form for consistency
     user_id: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+$')]),
     full_name: new FormControl('', Validators.required),
     referral_code: new FormControl(null)
@@ -67,9 +68,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
   get getEmailControl() { return this.step1Form.get('email'); }
   get getPasswordControl() { return this.step1Form.get('password'); }
   get getPasswordConfirmationControl() { return this.step1Form.get('password_confirmation'); }
-  get getUserIdControl() { return this.step2Form.get('user_id'); }
-  get getFullNameControl() { return this.step2Form.get('full_name'); }
-  get getReferralCodeControl() { return this.step2Form.get('referral_code'); }
+  get getUserIdControl() { return this.step3Form.get('user_id'); }
+  get getFullNameControl() { return this.step3Form.get('full_name'); }
+  get getReferralCodeControl() { return this.step3Form.get('referral_code'); }
 
   onStep1Submit() {
     if (this.step1Form.invalid) {
@@ -87,7 +88,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     };
     this.authService.registerStep1(step1Data).subscribe({
       next: (res: any) => {
-        this.step2Form.get('user_id')?.setValue(res.user_id?.toString() || ''); // Assuming API returns user_id
+        this.step3Form.get('user_id')?.setValue(res.data.user_id?.toString() || ''); // Assuming API returns user_id
         this.currentStep = 2;
         this.isLoading = false;
         console.log(res);
@@ -102,25 +103,30 @@ export class RegisterComponent implements OnInit, OnDestroy {
     });
   }
 
-  onStep2Submit() {
-    if (this.step2Form.invalid) {
-      this.step2Form.markAllAsTouched();
+  onStep3Submit() {
+    if (this.step3Form.invalid) {
+      this.step3Form.markAllAsTouched();
       return;
     }
     this.isLoading = true;
-    const step2Data = {
-      user_id: this.step2Form.get('user_id')?.value || '0',
-      full_name: this.step2Form.get('full_name')?.value || '',
-      referral_code: this.step2Form.get('referral_code')?.value ?? null
+    const step3Data = {
+      user_id: this.step3Form.get('user_id')?.value || '0',
+      full_name: this.step3Form.get('full_name')?.value || '',
+      referral_code: this.step3Form.get('referral_code')?.value ?? null
     };
-    this.authService.registerStep2(step2Data).subscribe({
-      next: () => {
-        this.toastr.success('Registration successful!', 'Success');
-        this.router.navigate(['/login']); // Redirect to Login Page as per task
+    this.authService.registerStep3(step3Data).subscribe({
+      next: (res: ApiResponse) => {
+        if (res.success === false) {
+          this.errorMessage = res.message || 'Step 3 registration failed.';
+          this.toastr.error(this.errorMessage, 'Error');
+        } else {
+          this.toastr.success('Registration successful!', 'Success');
+          this.router.navigate(['/login']);
+        }
         this.isLoading = false;
       },
       error: (error) => {
-        this.errorMessage = error.error.message || 'Step 3 registration failed. Please try again.';
+        this.errorMessage = error.error?.message || 'Step 3 registration failed. Please try again.';
         this.toastr.error(this.errorMessage!, 'Error');
         this.isLoading = false;
       }

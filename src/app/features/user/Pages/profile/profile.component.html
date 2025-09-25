@@ -1,1 +1,26 @@
-<p>profile works!</p>
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+  <div class="py-5 mx-auto w-11/12 max-w-lg">
+    <h2 class="text-4xl text-emerald-500">Profile</h2>
+
+    <div class="px-10 mx-auto py-8">
+      @if (errorMessage) {
+        <p class="text-red-600 text-center text-sm mb-4">{{ errorMessage }}</p>
+      } @else {
+        <div class="space-y-4">
+          <div class="relative z-0 w-full mb-5">
+            <label class="block text-sm font-medium text-gray-700">Full Name</label>
+            <p class="mt-1 block w-full px-2 py-2 text-sm border-0 border-b-2 border-gray-300">{{ fullName }}</p>
+          </div>
+          <div class="relative z-0 w-full mb-5">
+            <label class="block text-sm font-medium text-gray-700">Email</label>
+            <p class="mt-1 block w-full px-2 py-2 text-sm border-0 border-b-2 border-gray-300">{{ email }}</p>
+          </div>
+          <div class="relative z-0 w-full mb-5">
+            <label class="block text-sm font-medium text-gray-700">Mobile</label>
+            <p class="mt-1 block w-full px-2 py-2 text-sm border-0 border-b-2 border-gray-300">{{ mobile }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>
