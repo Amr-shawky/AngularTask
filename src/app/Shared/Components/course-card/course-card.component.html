@@ -5,7 +5,9 @@
   <div class="px-6 py-4">
     <div class="font-bold text-xl mb-2">{{ course.title }}</div>
     <p class="text-gray-600 text-sm mt-2">Teacher: {{ course.teacher.full_name }}</p>
-    <p class="text-gray-800 font-semibold mt-2">Price: {{ course.price > 0 ? course.price_string || '$' + course.price : 'Free' }}</p>
+<p class="text-gray-800 font-semibold mt-2">
+  Price: {{ course.price | priceFormat:course.price_string }}
+</p>
   </div>
 <div class="px-6 py-4 flex justify-end">
     <a [routerLink]="['/course-details', course.id]" class="text-white bg-emerald-500 hover:bg-emerald-600 px-4 py-2 rounded-md text-sm font-medium">

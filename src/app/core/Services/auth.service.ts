@@ -27,11 +27,11 @@ type LoginData = {
   providedIn: 'root',
 })
 export class AuthService {
-
   // Base URL from the task
   private baseUrl = 'https://lms.klydar.com/api/development/';
 
-  isLogin = new BehaviorSubject<boolean>(false);
+  // Login state as a BehaviorSubject
+  private isLogin = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient, private router: Router) {
     // Check if token exists on init to set login state
@@ -40,25 +40,26 @@ export class AuthService {
     }
   }
 
+  // Method to get the current login state
+  isLoggedIn(): boolean {
+    return this.isLogin.getValue();
+  }
+
+  // Observable for components to subscribe to login state changes
+  getLoginState(): Observable<boolean> {
+    return this.isLogin.asObservable();
+  }
+
   registerStep1(data: Step1Data): Observable<any> {
-    return this.http.post(
-      `${this.baseUrl}register/step/1`,
-      data
-    );
+    return this.http.post(`${this.baseUrl}register/step/1`, data);
   }
 
   registerStep3(data: Step2Data): Observable<any> {
-    return this.http.post(
-      `${this.baseUrl}register/step/3`,
-      data
-    );
+    return this.http.post(`${this.baseUrl}register/step/3`, data);
   }
 
   login(data: LoginData): Observable<any> {
-    return this.http.post(
-      `${this.baseUrl}login`,
-      data
-    );
+    return this.http.post(`${this.baseUrl}login`, data);
   }
 
   saveToken(token: string) {
