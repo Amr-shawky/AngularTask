@@ -1,1 +1,18 @@
-<p>course-details works!</p>
+<div class="min-h-screen bg-gray-100 py-8">
+  <div class="container mx-auto px-4">
+    @if (errorMessage) {
+      <p class="text-red-600 text-center mb-4">{{ errorMessage }}</p>
+    } @else {
+      @if (course) {
+        <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-6">
+          <h1 class="text-3xl font-bold text-emerald-600 mb-4">{{ course.title }}</h1>
+          <div class="text-gray-700 text-base mb-4" [innerHTML]="course.description || 'No description available'"></div>
+          <p class="text-gray-800 font-semibold mb-2">Price: {{ course.price > 0 ? course.price_string || '$' + course.price : 'Free' }}</p>
+          <p class="text-gray-600">Status: {{ course.status }}</p>
+        </div>
+      } @else {
+        <p class="text-gray-500 text-center">Loading course details...</p>
+      }
+    }
+  </div>
+</div>

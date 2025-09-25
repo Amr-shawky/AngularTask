@@ -1,5 +1,6 @@
 // coursesInfo.ts
 export interface CoursesInfo {
+description: any;
   id: number;
   status: string;
   label: string;
