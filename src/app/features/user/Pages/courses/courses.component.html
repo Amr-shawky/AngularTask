@@ -1,1 +1,14 @@
-<p>courses works!</p>
+<div class="min-h-screen bg-gray-100 py-8">
+  <div class="container mx-auto px-4">
+    <h1 class="text-3xl font-bold text-emerald-600 mb-6">Available Courses</h1>
+    @if (errorMessage) {
+      <p class="text-red-600 text-center mb-4">{{ errorMessage }}</p>
+    } @else {
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        @for (course of courses; track course.id) {
+          <app-course-card [course]="course" />
+        }
+      </div>
+    }
+  </div>
+</div>
