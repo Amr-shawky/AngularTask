@@ -1,0 +1,32 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+  <div class="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Login</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-4">
+      <div>
+        <label for="username" class="block text-sm font-medium text-gray-700">Username:</label>
+        <input id="username" formControlName="username" placeholder="Enter username (e.g., testuser)" 
+               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
+               [class.border-red-500]="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
+        @if (loginForm.get('username')?.invalid && loginForm.get('username')?.touched) {
+          <p class="text-red-500 text-xs mt-1">Username is required.</p>
+        }
+      </div>
+      <div>
+        <label for="password" class="block text-sm font-medium text-gray-700">Password:</label>
+        <input id="password" type="password" formControlName="password" placeholder="Enter password (e.g., secret123)" 
+               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
+               [class.border-red-500]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+        @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+          <p class="text-red-500 text-xs mt-1">Password is required.</p>
+        }
+      </div>
+      <button type="submit" [disabled]="loginForm.invalid" 
+              class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        Login
+      </button>
+      @if (errorMessage) {
+        <p class="text-red-500 text-center text-sm mt-2">{{ errorMessage }}</p>
+      }
+    </form>
+  </div>
+</div>

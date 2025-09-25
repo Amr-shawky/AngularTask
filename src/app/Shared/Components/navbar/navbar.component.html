@@ -1,0 +1,59 @@
+<nav class="bg-white shadow-md ">
+  <div class="w-11/12 mx-auto flex items-center justify-between p-4 ">
+    
+    <!-- Logo -->
+    <a href="/home" class="flex items-center space-x-2 pe-5">
+      <img src="images/logo.svg" class="h-8 w-auto" alt="FreshCart Logo" />
+    </a>
+
+    <!-- Mobile menu button -->
+    <button
+      data-collapse-toggle="navbar-default"
+      type="button"
+      class="inline-flex items-center p-2 w-10 h-10 justify-center text-gray-600 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+      aria-controls="navbar-default"
+      aria-expanded="false"
+    >
+      <span class="sr-only">Open main menu</span>
+      <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+        stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+
+    <!-- Navbar Links -->
+    <div class=" me-auto  md:flex items-start space-x-8" id="navbar-default">
+      <ul class="flex items-start space-x-6 text-gray-600 font-medium">
+        @for (item of pages; track $index) {
+          <li>
+            <a
+              routerLink="{{item.path}}"
+              routerLinkActive="text-blue-600 font-semibold"
+              class="transition-colors duration-200 hover:text-blue-600"
+            >
+              {{ item.title }}
+            </a>
+          </li>
+        }
+      </ul>
+    </div>
+
+    <!-- Auth Links -->
+    <div class="hidden md:flex items-center space-x-6">
+      <ul class="flex items-center space-x-4 text-gray-600 font-medium">
+        @for (item of authpages; track $index) {
+          <li>
+            <a
+              routerLink="{{item.path}}"
+              routerLinkActive="text-blue-600 font-semibold"
+              class="transition-colors duration-200 hover:text-blue-600"
+            >
+              {{ item.title }}
+            </a>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+</nav>

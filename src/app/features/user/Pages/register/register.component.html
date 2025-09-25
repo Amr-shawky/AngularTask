@@ -1,0 +1,158 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+  <div class="py-5 mx-auto w-11/12 max-w-lg">
+    <h2 class="text-4xl text-emerald-500">Register Form</h2>
+
+    <form [formGroup]="step1Form" (ngSubmit)="onStep1Submit()" class="px-10 mx-auto py-8" *ngIf="currentStep === 1">
+      <div class="relative z-0 w-full mb-5 group">
+        <input formControlName="register_method" type="text" class="block py-2.5 px-2 w-full text-sm border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 peer" placeholder=" ">
+        <label for="floating_register_method" class="px-2 peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Register Method</label>
+      </div>
+      <div class="relative z-0 w-full mb-5 group">
+        <input formControlName="country_code" type="text" class="block py-2.5 px-2 w-full text-sm border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 peer" placeholder=" ">
+        <label for="floating_country_code" class="px-2 peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Country Code</label>
+      </div>
+      <div class="relative z-0 w-full mb-5 group">
+        <input formControlName="mobile" type="text" class="block py-2.5 px-2 w-full text-sm border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 peer" placeholder=" ">
+        <label for="floating_mobile" class="px-2 peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Mobile</label>
+        @if (getMobileControl?.touched && getMobileControl?.invalid) {
+          @if (getMobileControl?.errors?.['required']) {
+            <div class="mb-3 text-red-600">
+              <div class="flex items-center p-4 mb-4 text-sm border border-red-300 bg-red-50 rounded-lg" role="alert">
+                <i class="fas fa-exclamation-circle shrink-0 inline w-4 h-4 me-3"></i>
+                <span class="sr-only">Info</span>
+                <div>Mobile is required</div>
+              </div>
+            </div>
+          }
+          @if (getMobileControl?.errors?.['pattern']) {
+            <div class="mb-3 text-red-600">
+              <div class="flex items-center p-4 mb-4 text-sm border border-red-300 bg-red-50 rounded-lg" role="alert">
+                <i class="fas fa-exclamation-circle shrink-0 inline w-4 h-4 me-3"></i>
+                <span class="sr-only">Info</span>
+                <div>Mobile must be a valid number</div>
+              </div>
+            </div>
+          }
+        }
+      </div>
+      <div class="relative z-0 w-full mb-5 group">
+        <input formControlName="email" type="email" class="block py-2.5 px-2 w-full text-sm border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 peer" placeholder=" ">
+        <label for="floating_email" class="px-2 peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email</label>
+        @if (getEmailControl?.touched && getEmailControl?.invalid) {
+          @if (getEmailControl?.errors?.['required']) {
+            <div class="mb-3 text-red-600">
+              <div class="flex items-center p-4 mb-4 text-sm border border-red-300 bg-red-50 rounded-lg" role="alert">
+                <i class="fas fa-exclamation-circle shrink-0 inline w-4 h-4 me-3"></i>
+                <span class="sr-only">Info</span>
+                <div>Email is required</div>
+              </div>
+            </div>
+          }
+          @if (getEmailControl?.errors?.['email']) {
+            <div class="mb-3 text-red-600">
+              <div class="flex items-center p-4 mb-4 text-sm border border-red-300 bg-red-50 rounded-lg" role="alert">
+                <i class="fas fa-exclamation-circle shrink-0 inline w-4 h-4 me-3"></i>
+                <span class="sr-only">Info</span>
+                <div>Email is invalid</div>
+              </div>
+            </div>
+          }
+        }
+      </div>
+      <div class="relative z-0 w-full mb-5 group">
+        <input formControlName="password" type="password" class="block py-2.5 px-2 w-full text-sm border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 peer" placeholder=" ">
+        <label for="floating_password" class="px-2 peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
+        @if (getPasswordControl?.touched && getPasswordControl?.invalid) {
+          @if (getPasswordControl?.errors?.['required']) {
+            <div class="mb-3 text-red-600">
+              <div class="flex items-center p-4 mb-4 text-sm border border-red-300 bg-red-50 rounded-lg" role="alert">
+                <i class="fas fa-exclamation-circle shrink-0 inline w-4 h-4 me-3"></i>
+                <span class="sr-only">Info</span>
+                <div>Password is required</div>
+              </div>
+            </div>
+          }
+          @if (getPasswordControl?.errors?.['minlength']) {
+            <div class="mb-3 text-red-600">
+              <div class="flex items-center p-4 mb-4 text-sm border border-red-300 bg-red-50 rounded-lg" role="alert">
+                <i class="fas fa-exclamation-circle shrink-0 inline w-4 h-4 me-3"></i>
+                <span class="sr-only">Info</span>
+                <div>Password must be at least 6 characters</div>
+              </div>
+            </div>
+          }
+        }
+      </div>
+      <div class="relative z-0 w-full mb-5 group">
+        <input formControlName="password_confirmation" type="password" class="block py-2.5 px-2 w-full text-sm border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 peer" placeholder=" ">
+        <label for="floating_password_confirmation" class="px-2 peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Confirm Password</label>
+        @if (getPasswordConfirmationControl?.touched && step1Form.errors?.['mismatch']) {
+          <div class="mb-3 text-red-600">
+            <div class="flex items-center p-4 mb-4 text-sm border border-red-300 bg-red-50 rounded-lg" role="alert">
+              <i class="fas fa-exclamation-circle shrink-0 inline w-4 h-4 me-3"></i>
+              <span class="sr-only">Info</span>
+              <div>Passwords do not match</div>
+            </div>
+          </div>
+        }
+      </div>
+      <button type="submit" [disabled]="step1Form.invalid || isLoading" class="text-white font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center bg-green-700 hover:bg-green-800 focus:ring-green-300">
+        @if (isLoading) {
+          <span>Loading...</span>
+        } @else {
+          <span>Next</span>
+        }
+      </button>
+      @if (errorMessage) {
+        <p class="text-red-600 text-center text-sm mt-2">{{ errorMessage }}</p>
+      }
+    </form>
+
+    <form [formGroup]="step2Form" (ngSubmit)="onStep2Submit()" class="px-10 mx-auto py-8" *ngIf="currentStep === 2">
+      <div class="relative z-0 w-full mb-5 group">
+        <input formControlName="user_id" type="text" class="block py-2.5 px-2 w-full text-sm border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 peer" readonly placeholder=" ">
+        <label for="floating_user_id" class="px-2 peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">User ID</label>
+        @if (getUserIdControl?.touched && getUserIdControl?.invalid) {
+          @if (getUserIdControl?.errors?.['required']) {
+            <div class="mb-3 text-red-600">
+              <div class="flex items-center p-4 mb-4 text-sm border border-red-300 bg-red-50 rounded-lg" role="alert">
+                <i class="fas fa-exclamation-circle shrink-0 inline w-4 h-4 me-3"></i>
+                <span class="sr-only">Info</span>
+                <div>User ID is required</div>
+              </div>
+            </div>
+          }
+        }
+      </div>
+      <div class="relative z-0 w-full mb-5 group">
+        <input formControlName="full_name" type="text" class="block py-2.5 px-2 w-full text-sm border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 peer" placeholder=" ">
+        <label for="floating_full_name" class="px-2 peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Full Name</label>
+        @if (getFullNameControl?.touched && getFullNameControl?.invalid) {
+          @if (getFullNameControl?.errors?.['required']) {
+            <div class="mb-3 text-red-600">
+              <div class="flex items-center p-4 mb-4 text-sm border border-red-300 bg-red-50 rounded-lg" role="alert">
+                <i class="fas fa-exclamation-circle shrink-0 inline w-4 h-4 me-3"></i>
+                <span class="sr-only">Info</span>
+                <div>Full name is required</div>
+              </div>
+            </div>
+          }
+        }
+      </div>
+      <div class="relative z-0 w-full mb-5 group">
+        <input formControlName="referral_code" type="text" class="block py-2.5 px-2 w-full text-sm border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 peer" placeholder=" ">
+        <label for="floating_referral_code" class="px-2 peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Referral Code</label>
+      </div>
+      <button type="submit" [disabled]="step2Form.invalid || isLoading" class="text-white font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center bg-green-700 hover:bg-green-800 focus:ring-green-300">
+        @if (isLoading) {
+          <span>Loading...</span>
+        } @else {
+          <span>Submit</span>
+        }
+      </button>
+      @if (errorMessage) {
+        <p class="text-red-600 text-center text-sm mt-2">{{ errorMessage }}</p>
+      }
+    </form>
+  </div>
+</div>
