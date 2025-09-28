@@ -1,14 +1,20 @@
 <div class="min-h-screen bg-gray-100 py-8">
   <div class="container mx-auto px-4">
+    <select [(ngModel)]="filterText" (change)="filterCourses()" class="mb-4 p-2 border border-gray-300 rounded">
+      <option value="All">All Courses</option>
+      <option value="Free">Free Courses</option>
+    </select>
     <h1 class="text-3xl font-bold text-emerald-600 mb-6">Available Courses</h1>
     @if (errorMessage) {
       <p class="text-red-600 text-center mb-4">{{ errorMessage }}</p>
     } @else {
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        @for (course of courses; track course.id) {
+        @for (course of filteredCourses | async; track course.id) {
           <app-course-card [course]="course" />
         }
       </div>
     }
   </div>
 </div>
+<!-- tst -->
+<!-- <button class="bg-blue-500 text-white px-4 py-2 rounded" (click)="freecourses()">Filter Free Courses</button> -->
