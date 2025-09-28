@@ -28,13 +28,13 @@ export class LoginComponent {
       const loginData = this.loginForm.value;
       this.authService.login(loginData as { username: string; password: string }).subscribe({
         next: (res) => {
-          if (res.success === false) {
+          if (res.success == false) {
             this.errorMessage = res.message || 'Login failed. Please check your credentials.';
             console.log(res);
             console.error(this.errorMessage);
             return;
           }
-          this.authService.saveToken(res.token);
+          this.authService.saveToken(res.data.token);
           console.log('response:', res);
           console.log('Login successful');
           this.router.navigate(['/profile']);

@@ -33,9 +33,9 @@ export class ProfileComponent implements OnInit {
           this.toastr.error(this.errorMessage!, 'Error'); // Optional
           return;
         }
-        this.fullName = res.full_name || 'Not available';
-        this.email = res.email || 'Not available';
-        this.mobile = res.mobile || 'Not available';
+        this.fullName = res.data.user.full_name || 'Not available';
+        this.email = res.data.user.email || 'Not available';
+        this.mobile = res.data.user.mobile || 'Not available';
       },
       error: (err) => {
         this.errorMessage = 'Unable to fetch profile data. Please try again later.';

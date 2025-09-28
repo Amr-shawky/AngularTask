@@ -9,9 +9,9 @@ export const authGuard: CanActivateFn = (route, state) => {
   console.log({ isLogin }, 'authGuard');
 
   
-//   if (isLogin) {
+  if (isLogin) {
     return true;
-//   } else {
-//     return router.navigate(['/login']);
-//   }
+  } else {
+    return router.navigate(['/login']);
+  }
 };
