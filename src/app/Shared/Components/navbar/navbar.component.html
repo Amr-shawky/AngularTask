@@ -1,6 +1,5 @@
-<nav class="bg-white shadow-md ">
-  <div class="w-11/12 mx-auto flex items-center justify-between p-4 ">
-    
+<nav class="bg-white shadow-md">
+  <div class="w-11/12 mx-auto flex items-center justify-between p-4">
     <!-- Logo -->
     <!-- Mobile menu button -->
     <button
@@ -11,26 +10,35 @@
       aria-expanded="false"
     >
       <span class="sr-only">Open main menu</span>
-      <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-        stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M4 6h16M4 12h16M4 18h16" />
+      <svg
+        class="w-6 h-6"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"
+        />
       </svg>
     </button>
 
     <!-- Navbar Links -->
-    <div class=" me-auto  md:flex items-start space-x-8" id="navbar-default">
+    <div class="me-auto md:flex items-start space-x-8" id="navbar-default">
       <ul class="flex items-start space-x-6 text-gray-600 font-medium">
         @for (item of pages; track $index) {
-          <li>
-            <a
-              routerLink="{{item.path}}"
-              routerLinkActive="text-blue-600 font-semibold"
-              class="transition-colors duration-200 hover:text-blue-600"
-            >
-              {{ item.title }}
-            </a>
-          </li>
+        <li>
+          <a
+            routerLink="{{ item.path }}"
+            routerLinkActive="text-blue-600 font-semibold"
+            class="transition-colors duration-200 hover:text-blue-600"
+          >
+            {{ item.title }}
+          </a>
+        </li>
         }
       </ul>
     </div>
@@ -38,16 +46,29 @@
     <!-- Auth Links -->
     <div class="hidden md:flex items-center space-x-6">
       <ul class="flex items-center space-x-4 text-gray-600 font-medium">
-        @for (item of authpages; track $index) {
+        @if (!authService.isLoggedIn()) {
+          @for (item of authpages; track $index) {
           <li>
             <a
-              routerLink="{{item.path}}"
+              routerLink="{{ item.path }}"
               routerLinkActive="text-blue-600 font-semibold"
               class="transition-colors duration-200 hover:text-blue-600"
             >
               {{ item.title }}
             </a>
           </li>
+          }
+        }
+        <!-- sign out -->
+        @if (authService.isLoggedIn()) {
+        <li>
+          <a
+            (click)="signOut()"
+            class="cursor-pointer transition-colors duration-200 hover:text-blue-600"
+          >
+            Sign Out
+          </a>
+        </li>
         }
       </ul>
     </div>

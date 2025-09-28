@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from '../../../core/Services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,6 +9,9 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
+  constructor(private router: Router ,
+    public authService: AuthService
+  ) {}
 
 //     { path: 'login', loadComponent: () => import('./features/user/Pages/login/login.component').then(m => m.LoginComponent) },
 //     {path:'register', loadComponent: () => import('./features/user/Pages/register/register.component').then(m => m.RegisterComponent) },
@@ -24,4 +28,9 @@ export class NavbarComponent {
     {title: 'Login', path: '/login'},
     {title: 'Register', path: '/register'},
   ];
+
+  signOut() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
+  }
 }
