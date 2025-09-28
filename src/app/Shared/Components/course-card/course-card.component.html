@@ -6,7 +6,7 @@
     <div class="font-bold text-xl mb-2">{{ course.title }}</div>
     <p class="text-gray-600 text-sm mt-2">Teacher: {{ course.teacher.full_name }}</p>
 <p class="text-gray-800 font-semibold mt-2">
-  Price: {{ course.price | priceFormat:course.price_string }}
+  Price: {{ course.price | priceFormat:'EGP' }}
 </p>
   </div>
 <div class="px-6 py-4 flex justify-end">
