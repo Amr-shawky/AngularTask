@@ -1,9 +1,20 @@
 <div class="min-h-screen bg-gray-100 py-8">
   <div class="container mx-auto px-4">
-    <select [(ngModel)]="filterText" (change)="filterCourses()" class="mb-4 p-2 border border-gray-300 rounded">
-      <option value="All">All Courses</option>
-      <option value="Free">Free Courses</option>
-    </select>
+    <div class="flex justify-between items-center mb-4">
+      <select [(ngModel)]="filterText" (change)="filterCourses()" class="mb-4 p-2 border border-gray-300 rounded">
+        <option selected value="All">All Courses</option>
+        <option value="Free">Free Courses</option>
+      </select>
+      <select [(ngModel)]="itemsPerPage" (change)="limitChange()" class="mb-4 p-2 border border-gray-300 rounded">
+        <option value=1>1</option>
+        <option selected value="2">2</option>
+        <option value=4>4</option>
+        <option value=6>6</option>
+        <option value=8>8</option>
+        <option value=10>10</option>
+        <option value=12>12</option>
+      </select>
+    </div>
     <h1 class="text-3xl font-bold text-emerald-600 mb-6">Available Courses</h1>
     @if (errorMessage) {
       <p class="text-red-600 text-center mb-4">{{ errorMessage }}</p>
@@ -13,8 +24,25 @@
           <app-course-card [course]="course" />
         }
       </div>
+      <nav class="mx-auto py-5" aria-label="Page navigation example">
+        <ul class=" inline-flex -space-x-px text-base h-10">
+          <li (click)="previous()">
+            <a class="cursor-pointer flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 ">Previous</a>
+          </li>
+          <li (click)="next()">
+            <a [attr.aria-disabled]="filteredCourses.value.length < itemsPerPage ? true : null"
+               [class.opacity-50]="filteredCourses.value.length < itemsPerPage"
+               class="cursor-pointer flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 ">
+              Next
+            </a>
+          </li>
+        </ul>
+      </nav>
     }
   </div>
+  
+  
+  
 </div>
 <!-- tst -->
 <!-- <button class="bg-blue-500 text-white px-4 py-2 rounded" (click)="freecourses()">Filter Free Courses</button> -->

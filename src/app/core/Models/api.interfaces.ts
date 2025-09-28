@@ -55,6 +55,10 @@ export interface Sales {
   amount: number;
 }
 
+export interface CourseParams {
+  offset: number;
+  limit: number;
+}
 export interface RateType {
   content_quality: number;
   instructor_skills: number;

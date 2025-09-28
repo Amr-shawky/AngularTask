@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiResponse , CoursesInfo } from '../Models/api.interfaces'; // Adjust path as per your project structure
@@ -12,8 +12,8 @@ export class CourseService {
   constructor(private http: HttpClient) {}
 
   // Fetch list of courses
-  getCourses(): Observable<ApiResponse> {
-    return this.http.get<ApiResponse>(`${this.baseUrl}courses`);
+  getCourses(params: HttpParams): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(`${this.baseUrl}courses?`, { params });
   }
 
   // Fetch details of a specific course
